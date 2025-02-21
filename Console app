@@ -1,0 +1,122 @@
+using System;
+
+struct Student
+{
+    public int StudentId;
+    public string Name;
+    public string Course;
+    public DateTime DateOfBirth;
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the number of students: ");
+        int count = int.Parse(Console.ReadLine());
+
+        Student[] students = new Student[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            Console.WriteLine($"Enter details for student {i + 1}:");
+
+            Console.Write("Student ID: ");
+            students[i].StudentId = int.Parse(Console.ReadLine());
+
+            Console.Write("Name: ");
+            students[i].Name = Console.ReadLine();
+
+            Console.Write("Course Name: ");
+            students[i].Course = Console.ReadLine();
+
+            Console.Write("Date of Birth (yyyy-mm-dd): ");
+            students[i].DateOfBirth = DateTime.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("\nStudent Information:");
+        Console.WriteLine("--------------------------------------");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"ID: {student.StudentId}, Name: {student.Name}, Course: {student.Course}, DOB: {student.DateOfBirth:yyyy-MM-dd}");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+
+        if (!string.IsNullOrWhiteSpace(input))
+        {
+            string[] words = input.Split(' ');
+            string result = string.Join(" ", Array.ConvertAll(words, word => $"\"{word}\""));
+            
+            Console.WriteLine("Output: " + result);
+        }
+        else
+        {
+            Console.WriteLine("Input string cannot be empty.");
+        }
+    }
+}
+
+
+
+
+
+
+using System;
+
+class Distance
+{
+    private double dist1, dist2, dist3;
+
+    public Distance(double d1, double d2)
+    {
+        dist1 = d1;
+        dist2 = d2;
+        dist3 = 0; // Initialize to zero
+    }
+
+    public void AddDistances()
+    {
+        dist3 = dist1 + dist2;
+    }
+
+    public void Display()
+    {
+        Console.WriteLine($"Distance 1: {dist1}");
+        Console.WriteLine($"Distance 2: {dist2}");
+        Console.WriteLine($"Total Distance: {dist3}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter first distance: ");
+        double d1 = double.Parse(Console.ReadLine());
+        
+        Console.Write("Enter second distance: ");
+        double d2 = double.Parse(Console.ReadLine());
+        
+        Distance dist = new Distance(d1, d2);
+        dist.AddDistances();
+        dist.Display();
+    }
+}
