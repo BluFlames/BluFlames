@@ -1,0 +1,56 @@
+Write a JavaScript that calculates the squares and cubes of the numbers from 0 to 10 and 
+outputs HTML text that displays the resulting values in an HTML table format.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squares and Cubes Table</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Squares and Cubes of Numbers (0-10)</h2>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Square</th>
+                <th>Cube</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function generateTable() {
+            let tableBody = document.querySelector("#resultTable tbody");
+            for (let i = 0; i <= 10; i++) {
+                let row = document.createElement("tr");
+                row.innerHTML = `<td>${i}</td><td>${i ** 2}</td><td>${i ** 3}</td>`;
+                tableBody.appendChild(row);
+            }
+        }
+        
+        generateTable();
+    </script>
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
