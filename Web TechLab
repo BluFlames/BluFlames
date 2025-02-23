@@ -68,3 +68,139 @@ outputs HTML text that displays the resulting values in an HTML table format.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+DIV Tag Demonstration
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIV Tag Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        /* Outer container */
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border: 2px solid black;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header section */
+        .header {
+            background-color: #ff5733;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Content section */
+        .content {
+            background-color: #33c3ff;
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid #000;
+        }
+
+        /* Footer section */
+        .footer {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">This is a Header (DIV)</div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <p>This is a content section inside a DIV.</p>
+        </div>
+
+        <div class="content">
+            <p>Another content section with different styling.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">This is a Footer (DIV)</div>
+
+    </div>
+
+</body>
+</html>
+
+_________________________________________________________________________________________________________________________________________________________________
+
+Types of CSS
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of CSS</title>
+    
+    <!-- Internal CSS -->
+    <style>
+        body{
+            background-color: #450f0f;
+        }
+        p {
+            color: #008000;
+            font-size: 18px;
+            border: 2px solid black;
+            padding: 10px;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Inline CSS -->
+    <h1 style="color: blue; text-align: center; font-family: Arial;">This is Inline CSS</h1>
+
+    <p>This paragraph is styled using Internal CSS.</p>
+
+    <button class="styled-button">Styled with External CSS</button>
+
+</body>
+</html>
+
+-------------------------------------------------------
+
+styles.css
+
+.styled-button {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.styled-button:hover {
+    background-color: navy;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
