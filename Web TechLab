@@ -8,18 +8,32 @@ outputs HTML text that displays the resulting values in an HTML table format.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squares and Cubes Table</title>
     <style>
+        body{
+            font-family: Arial, sans-serif;
+            color : #ffffff;
+            background-image: linear-gradient(to left, #735DA5, #1e0f89);
+        }
         table {
             width: 50%;
             border-collapse: collapse;
             margin: 20px auto;
+            border-radius: 10px;
             text-align: center;
+            overflow: hidden;
         }
         th, td {
-            border: 1px solid black;
+            color:#000000;
+            border: 0.5px solid #000000; 
+            background-color: #A1BE95;
             padding: 10px;
         }
         th {
-            background-color: #f2f2f2;
+            color : #000000;
+            background-color: #F98866;
+        }
+        tr:hover td {
+            background-color: #79f5e4b0;
+            transform: scale(5px);
         }
     </style>
 </head>
