@@ -204,3 +204,382 @@ styles.css
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Dynamic Webpage with Validation:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5563c1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name">
+                <div class="error" id="nameError">Name is required.</div>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+                <div class="error" id="emailError">Enter a valid email.</div>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password">
+                <div class="error" id="passwordError">Password must be at least 6 characters.</div>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone">
+                <div class="error" id="phoneError">Enter a valid 10-digit phone number.</div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let valid = true;
+            
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let phone = document.getElementById("phone").value.trim();
+            
+            if (!name) {
+                document.getElementById("nameError").style.display = "block";
+                valid = false;
+            } else {
+                document.getElementById("nameError").style.display = "none";
+            }
+            
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").style.display = "block";
+                valid = false;
+            } else {
+                document.getElementById("emailError").style.display = "none";
+            }
+            
+            if (password.length < 6) {
+                document.getElementById("passwordError").style.display = "block";
+                valid = false;
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+            
+            let phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                document.getElementById("phoneError").style.display = "block";
+                valid = false;
+            } else {
+                document.getElementById("phoneError").style.display = "none";
+            }
+            
+            if (valid) {
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Audio and Video Player Usage in HTML:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        audio, video {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5563c1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Audio Player</h2>
+        <audio id="audioPlayer" controls>
+            <source src="audio.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+        <button onclick="toggleAudio()">Play/Pause Audio</button>
+    </div>
+
+    <div class="container" style="margin-top: 20px;">
+        <h2>Video Player</h2>
+        <video id="videoPlayer" controls>
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button onclick="toggleVideo()">Play/Pause Video</button>
+    </div>
+
+    <script>
+        function toggleAudio() {
+            let audio = document.getElementById("audioPlayer");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function toggleVideo() {
+            let video = document.getElementById("videoPlayer");
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dynamic Calculator using HTML, CSS and JavaScript:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+        }
+        .calculator {
+            width: 350px;
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+        #display {
+            width: 330px;
+            height: 80px;
+            text-align: right;
+            font-size: 2.5em;
+            border: none;
+            background: #000000;
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            height: 70px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-green { background: #0f0; color: black; }
+        .btn-orange { background: #ff9500; color: white; }
+        .btn-red { background: #ff3b30; color: white; }
+        .btn-dark { background: #333; color: white; }
+        .btn-dark:hover { background: #444; }
+        .btn-orange:hover { background: #e68900; }
+        .btn-red:hover { background: #e62e24; }
+        .btn-green:hover { background: #0d0; }
+        .zero {
+            grid-column: span 2;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="btn-red" onclick="clearDisplay()">C</button>
+            <button class="btn-green" onclick="appendValue('+/-')">±</button>
+            <button class="btn-green" onclick="appendValue('%')">%</button>
+            <button class="btn-orange" onclick="appendValue('/')">÷</button>
+            
+            <button class="btn-dark" onclick="appendValue('7')">7</button>
+            <button class="btn-dark" onclick="appendValue('8')">8</button>
+            <button class="btn-dark" onclick="appendValue('9')">9</button>
+            <button class="btn-orange" onclick="appendValue('*')">×</button>
+            
+            <button class="btn-dark" onclick="appendValue('4')">4</button>
+            <button class="btn-dark" onclick="appendValue('5')">5</button>
+            <button class="btn-dark" onclick="appendValue('6')">6</button>
+            <button class="btn-orange" onclick="appendValue('-')">−</button>
+            
+            <button class="btn-dark" onclick="appendValue('1')">1</button>
+            <button class="btn-dark" onclick="appendValue('2')">2</button>
+            <button class="btn-dark" onclick="appendValue('3')">3</button>
+            <button class="btn-orange" onclick="appendValue('+')">+</button>
+            
+            <button class="btn-dark zero" onclick="appendValue('0')">0</button>
+            <button class="btn-dark" onclick="appendValue('.')">.</button>
+            <button class="btn-orange" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    <script>
+        function appendValue(value) {
+            document.getElementById("display").value += value;
+        }
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+        function calculateResult() {
+            try {
+                document.getElementById("display").value = eval(document.getElementById("display").value);
+            } catch {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
