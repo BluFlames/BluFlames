@@ -1,0 +1,58 @@
+using System;
+
+class ParameterModifiers
+{
+    // Using ref (Modifies original value)
+    public void Square(ref int num)
+    {
+        num = num * num;
+        Console.WriteLine($"Squared Value: {num}");
+    }
+
+    // Using out (Returns multiple values)
+    public void GetValues(out int x, out int y)
+    {
+        x = 10;
+        y = 20;
+    }
+
+    // Using params (Takes variable number of arguments)
+    public void Sum(params int[] numbers)
+    {
+        int total = 0;
+        foreach (int num in numbers)
+        {
+            total += num;
+        }
+        Console.WriteLine($"Sum of numbers: {total}");
+    }
+
+    static void Main()
+    {
+        ParameterModifiers obj = new ParameterModifiers();
+
+        // ref Example
+        int number = 5;
+        Console.WriteLine($"Original Number: {number}");
+        obj.Square(ref number);
+        Console.WriteLine($"Modified Number (After ref): {number}");
+
+        // out Example
+        obj.GetValues(out int a, out int b);
+        Console.WriteLine($"\nValues from out method: a = {a}, b = {b}");
+
+        // params Example
+        Console.WriteLine("\nUsing params method:");
+        obj.Sum(2, 4, 6, 8, 10); // Can take any number of arguments
+    }
+}
+
+
+Original Number: 5
+Squared Value: 25
+Modified Number (After ref): 25
+
+Values from out method: a = 10, b = 20
+
+Using params method:
+Sum of numbers: 30
