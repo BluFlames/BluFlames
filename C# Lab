@@ -56,3 +56,239 @@ Values from out method: a = 10, b = 20
 
 Using params method:
 Sum of numbers: 30
+--------------------------------------------------------------------------------------------------------
+
+using System;
+
+class EvenNumberException : Exception
+{
+    public EvenNumberException(string message) : base(message) { }
+}
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Enter a number: ");
+            int number = Convert.ToInt32(Console.ReadLine());
+
+            if (number % 2 != 0)
+            {
+                throw new EvenNumberException("Error: The number is not even!");
+            }
+
+            Console.WriteLine("The number is even.");
+        }
+        catch (EvenNumberException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Invalid input! Please enter a valid integer.");
+        }
+    }
+}
+
+Enter a number: 7
+Error: The number is not even!
+
+Enter a number: 8
+The number is even.
+
+Enter a number: abc
+Invalid input! Please enter a valid integer.
+----------------------------------------------------------
+
+Create an application that allows the user to enter a number in the textbox 
+named ‘getnum’. Check whether the number in the textbox ‘getnum’ is 
+palindrome or not. Print the message accordingly in the label control named lbl 
+display when the user clicks on the button ‘check’.
+
+using System;
+using System.Windows.Forms;
+
+namespace PalindromeChecker
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            string input = txtGetNum.Text.Trim();
+
+            if (IsPalindrome(input))
+            {
+                lblDisplay.Text = input + " is a Palindrome.";
+            }
+            else
+            {
+                lblDisplay.Text = input + " is NOT a Palindrome.";
+            }
+        }
+
+        private bool IsPalindrome(string str)
+        {
+            int len = str.Length;
+            for (int i = 0; i < len / 2; i++)
+            {
+                if (str[i] != str[len - i - 1])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}
+
+
+---------------------------------------------------------------------------------------------
+
+Create an application which will ask the user to input his name and a message, 
+display the two items concatenated in a label, and change the format of the 
+label using radio buttons and check boxes for selection, the user can make the 
+label text bold, underlined or italic and change its color. Include buttons to   
+display the message in the label, clear the text boxes and label and exit.
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace MessageFormatterApp
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            // Get user input
+            string name = txtName.Text.Trim();
+            string message = txtMessage.Text.Trim();
+
+            // Check if both fields are filled
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(message))
+            {
+                MessageBox.Show("Please enter both Name and Message!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Display the concatenated message
+            lblDisplay.Text = name + ": " + message;
+
+            // Apply text formatting
+            ApplyFormatting();
+        }
+
+        private void ApplyFormatting()
+        {
+            FontStyle style = FontStyle.Regular;
+
+            if (chkBold.Checked) style |= FontStyle.Bold;
+            if (chkItalic.Checked) style |= FontStyle.Italic;
+            if (chkUnderline.Checked) style |= FontStyle.Underline;
+
+            lblDisplay.Font = new Font(lblDisplay.Font.FontFamily, 12, style);
+
+            if (rdoRed.Checked) lblDisplay.ForeColor = Color.Red;
+            else if (rdoBlue.Checked) lblDisplay.ForeColor = Color.Blue;
+            else if (rdoGreen.Checked) lblDisplay.ForeColor = Color.Green;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtName.Clear();
+            txtMessage.Clear();
+            lblDisplay.Text = "";
+            chkBold.Checked = false;
+            chkItalic.Checked = false;
+            chkUnderline.Checked = false;
+            rdoRed.Checked = false;
+            rdoBlue.Checked = false;
+            rdoGreen.Checked = false;
+            lblDisplay.ForeColor = Color.Black;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void FormattingChanged(object sender, EventArgs e)
+        {
+            ApplyFormatting();
+        }
+    }
+}
+
+
+--------------------------------------------------------------------------------
+
+List of employees is available in listbox. Write an application to add selected or 
+all records from listbox (assume multi-line property of textbox is true).
+
+using System;
+using System.Windows.Forms;
+
+namespace EmployeeListApp
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            
+            // Pre-populate ListBox with employee names
+            lstEmployees.Items.Add("John Doe");
+            lstEmployees.Items.Add("Alice Smith");
+            lstEmployees.Items.Add("Robert Brown");
+            lstEmployees.Items.Add("Emily Johnson");
+            lstEmployees.Items.Add("David Miller");
+        }
+
+        private void btnAddSelected_Click(object sender, EventArgs e)
+        {
+            // Check if any employee is selected
+            if (lstEmployees.SelectedItems.Count > 0)
+            {
+                txtDisplay.Clear(); // Clear previous content
+                
+                // Add selected employees to textbox
+                foreach (var item in lstEmployees.SelectedItems)
+                {
+                    txtDisplay.AppendText(item.ToString() + Environment.NewLine);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one employee.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnAddAll_Click(object sender, EventArgs e)
+        {
+            txtDisplay.Clear(); // Clear previous content
+            
+            // Add all employees to textbox
+            foreach (var item in lstEmployees.Items)
+            {
+                txtDisplay.AppendText(item.ToString() + Environment.NewLine);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtDisplay.Clear(); // Clear textbox
+        }
+    }
+}
