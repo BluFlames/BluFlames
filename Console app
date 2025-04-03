@@ -120,3 +120,92 @@ class Program
         dist.Display();
     }
 }
+
+
+
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace User_Message
+{
+    public partial class Form1 : Form
+    {
+        private TextBox nameField, messageField;
+        private Label displayLabel;
+        private CheckBox boldCheckBox, italicCheckBox, underlineCheckBox;
+        private RadioButton redButton, blueButton, greenButton;
+        private Button displayButton, clearButton, exitButton;
+
+        public Form1()
+        {
+            InitializeComponent();
+            InitializeCustomComponents();
+        }
+
+        private void InitializeCustomComponents()
+        {
+            Text = "Text Formatter";
+            Size = new Size(400, 300);
+
+            var nameLabel = new Label { Text = "Enter Name:", Location = new Point(20, 20) };
+            nameField = new TextBox { Location = new Point(120, 20), Width = 150 };
+
+            var messageLabel = new Label { Text = "Enter Message:", Location = new Point(20, 50) };
+            messageField = new TextBox { Location = new Point(120, 50), Width = 150 };
+
+            displayLabel = new Label { Text = "Your text will appear here", Location = new Point(20, 80), AutoSize = true };
+
+            boldCheckBox = new CheckBox { Text = "Bold", Location = new Point(20, 110) };
+            italicCheckBox = new CheckBox { Text = "Italic", Location = new Point(80, 110) };
+            underlineCheckBox = new CheckBox { Text = "Underline", Location = new Point(150, 110) };
+
+            redButton = new RadioButton { Text = "Red", Location = new Point(20, 140) };
+            blueButton = new RadioButton { Text = "Blue", Location = new Point(80, 140) };
+            greenButton = new RadioButton { Text = "Green", Location = new Point(150, 140) };
+
+            displayButton = new Button { Text = "Display", Location = new Point(20, 180) };
+            clearButton = new Button { Text = "Clear", Location = new Point(100, 180) };
+            exitButton = new Button { Text = "Exit", Location = new Point(180, 180) };
+
+            displayButton.Click += (s, e) => UpdateLabel();
+            clearButton.Click += (s, e) => ClearFields();
+            exitButton.Click += (s, e) => Application.Exit();
+
+            Controls.AddRange(new Control[] { nameLabel, nameField, messageLabel, messageField, displayLabel,
+                                              boldCheckBox, italicCheckBox, underlineCheckBox,
+                                              redButton, blueButton, greenButton,
+                                              displayButton, clearButton, exitButton });
+        }
+
+        private void UpdateLabel()
+        {
+            string name = nameField.Text.Trim();
+            string message = messageField.Text.Trim();
+            string text = name + ": " + message;
+
+            FontStyle style = FontStyle.Regular;
+            if (boldCheckBox.Checked) style |= FontStyle.Bold;
+            if (italicCheckBox.Checked) style |= FontStyle.Italic;
+            displayLabel.Font = new Font("Arial", 12, style);
+
+            if (underlineCheckBox.Checked) displayLabel.Font = new Font(displayLabel.Font, displayLabel.Font.Style | FontStyle.Underline);
+
+            displayLabel.Text = text;
+            displayLabel.ForeColor = redButton.Checked ? Color.Red : blueButton.Checked ? Color.Blue : greenButton.Checked ? Color.Green : Color.Black;
+        }
+
+        private void ClearFields()
+        {
+            nameField.Text = "";
+            messageField.Text = "";
+            displayLabel.Text = "Your text will appear here";
+            displayLabel.Font = new Font("Arial", 12, FontStyle.Regular);
+            displayLabel.ForeColor = Color.Black;
+            boldCheckBox.Checked = false;
+            italicCheckBox.Checked = false;
+            underlineCheckBox.Checked = false;
+        }
+    }
+}
