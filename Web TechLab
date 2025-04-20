@@ -900,3 +900,120 @@ button:active{
 .operator-btn:active{
     background-color: hsl(35, 100%, 75%);
 }
+---------------------------------------------------------------------------------------
+Design an XML document to store information about a student in JSS STU. The information 
+must include USN, Name, and Name of the College, Branch, Year of Joining, and email id. 
+Make up sample data for 3students. Create a CSS style sheet and use it to display the 
+document. 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="students.css"?>
+<students>
+    <student>
+        <usn>1JS23CS001</usn>
+        <name>Arjun S</name>
+        <college>JSS Science and Technology University</college>
+        <branch>Computer Science and Engineering</branch>
+        <yearOfJoining>2023</yearOfJoining>
+        <email>arjun.s@jssstu.edu.in</email>
+    </student>
+    <student>
+        <usn>1JS23EC002</usn>
+        <name>Divya K</name>
+        <college>JSS Science and Technology University</college>
+        <branch>Electronics and Communication Engineering</branch>
+        <yearOfJoining>2023</yearOfJoining>
+        <email>divya.k@jssstu.edu.in</email>
+    </student>
+    <student>
+        <usn>1JS23ME003</usn>
+        <name>Rahul M</name>
+        <college>JSS Science and Technology University</college>
+        <branch>Mechanical Engineering</branch>
+        <yearOfJoining>2023</yearOfJoining>
+        <email>rahul.m@jssstu.edu.in</email>
+    </student>
+</students>
+
+students.css
+students {
+    display: block;
+    background-color: #f0f8ff;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+student {
+    display: block;
+    background-color: #e6f7ff;
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+usn, name, college, branch, yearOfJoining, email {
+    display: block;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+name {
+    font-weight: bold;
+    color: #2a5d84;
+}
+
+email {
+    color: #007acc;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bootstrap table:
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<title>Bootstrap Example</title> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+</head> 
+<body> 
+ 
+<div class="container"> 
+  <h2>Basic Table</h2> 
+  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>             
+  <table class="table"> 
+    <thead> 
+      <tr> 
+        <th>Firstname</th> 
+        <th>Lastname</th> 
+        <th>Email</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      <tr> 
+        <td>John</td> 
+        <td>Doe</td> 
+        <td>john@example.com</td> 
+      </tr> 
+      <tr> 
+        <td>Mary</td> 
+        <td>Moe</td> 
+        <td>mary@example.com</td> 
+      </tr> 
+      <tr> 
+<td>July</td> 
+<td>Dooley</td> 
+<td>july@example.com</td> 
+</tr> 
+</tbody> 
+</table> 
+</div> 
+</body> 
+</html>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
