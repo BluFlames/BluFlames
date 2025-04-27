@@ -274,10 +274,13 @@ AngularJS TO-DO example:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple AngularJS To-Do List</title>
+    <title>Cool AngularJS To-Do List</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <style>
-        input {
+        body {
+            font-family: Arial, sans-serif;
+        }
+        input[type="text"] {
             width: 200px;
             height: 30px;
             font-size: 18px;
@@ -296,47 +299,47 @@ AngularJS TO-DO example:
             font-size: 20px;
             margin: 5px 0;
         }
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
     </style>
 </head>
 
-<body ng-app="">
+<body ng-app="myApp" ng-controller="myCtrl">
 
-<h2>📝 Simple To-Do List</h2>
+<h2>📝 Cool AngularJS To-Do List</h2>
 
-<!-- Input to add new task -->
-<input type="text" ng-model="task" placeholder="Enter a task">
+<input type="text" ng-model="newTask" placeholder="Enter a task">
 <button ng-click="addTask()">Add</button>
 
-<!-- Show the list -->
 <ul>
-    <li ng-repeat="x in tasks">
-        {{x}} <button ng-click="removeTask($index)">❌</button>
+    <li ng-repeat="task in tasks">
+        <input type="checkbox" ng-model="task.done">
+        <span ng-class="{done: task.done}">{{task.name}}</span>
+        <button ng-click="removeTask($index)">❌</button>
     </li>
 </ul>
 
 <script>
-// AngularJS code inside <script> tag
-function addTask() {
-    if (!$scope.tasks) {
-        $scope.tasks = [];
-    }
-    if ($scope.task) {
-        $scope.tasks.push($scope.task);
-        $scope.task = ""; // clear input box
-    }
-}
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.tasks = [];
 
-function removeTask(index) {
-    $scope.tasks.splice(index, 1);
-}
+    $scope.addTask = function() {
+        if ($scope.newTask) {
+            $scope.tasks.push({name: $scope.newTask, done: false});
+            $scope.newTask = "";
+        }
+    };
 
-// Bind functions to Angular manually
-var appElement = document.querySelector('[ng-app]');
-var $scope = angular.element(appElement).scope();
-$scope.addTask = addTask;
-$scope.removeTask = removeTask;
+    $scope.removeTask = function(index) {
+        $scope.tasks.splice(index, 1);
+    };
+});
 </script>
 
 </body>
 </html>
+
 -------------------------------------------------------------------------------------------------------------------------------
