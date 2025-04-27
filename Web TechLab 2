@@ -1,1 +1,342 @@
+Write the PHP programs to do the following: a) Implement simple calculator operations. b) 
+Find the transpose of a matrix. c) Multiplication of two matrices. d) Addition of two 
+matrices. 
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Button Calculator</title>
+    <style>
+        .btn {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 3px;
+        }
+        .display {
+            width: 255px;
+            height: 40px;
+            font-size: 20px;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Simple Calculator</h2>
+
+<form action="calculator.php" method="post">
+    <input type="text" name="expression" id="expression" class="display" readonly><br>
+
+    <button type="button" class="btn" onclick="append('7')">7</button>
+    <button type="button" class="btn" onclick="append('8')">8</button>
+    <button type="button" class="btn" onclick="append('9')">9</button>
+    <button type="button" class="btn" onclick="append('+')">+</button><br>
+
+    <button type="button" class="btn" onclick="append('4')">4</button>
+    <button type="button" class="btn" onclick="append('5')">5</button>
+    <button type="button" class="btn" onclick="append('6')">6</button>
+    <button type="button" class="btn" onclick="append('-')">-</button><br>
+
+    <button type="button" class="btn" onclick="append('1')">1</button>
+    <button type="button" class="btn" onclick="append('2')">2</button>
+    <button type="button" class="btn" onclick="append('3')">3</button>
+    <button type="button" class="btn" onclick="append('')"></button><br>
+
+    <button type="button" class="btn" onclick="append('0')">0</button>
+    <button type="button" class="btn" onclick="append('.')">.</button>
+    <button type="button" class="btn" onclick="clearDisplay()">C</button>
+    <button type="button" class="btn" onclick="append('/')">/</button><br><br>
+
+    <input type="submit" value="=" class="btn" style="width:255px;background-color:lightgreen;">
+</form>
+
+<script>
+function append(value) {
+    document.getElementById('expression').value += value;
+}
+function clearDisplay() {
+    document.getElementById('expression').value = '';
+}
+</script>
+
+</body>
+</html>
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $exp = $_POST['expression'];
+
+    // Allow only valid characters (numbers and operators)
+    if (preg_match('/^[0-9+\-*/.]+$/', $exp)) {
+        try {
+            $result = eval("return $exp;");
+            echo "<h2>Calculation Result</h2>";
+            echo "<p>Expression: " . htmlspecialchars($exp) . "</p>";
+            echo "<p>Result: " . $result . "</p>";
+        } catch (Error $e) {
+            echo "<p>Invalid Calculation.</p>";
+        }
+    } else {
+        echo "<p>Invalid Input.</p>";
+    }
+}
+?>
+
+
+Transpose of Matrix :
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Transpose</title>
+    <style>
+        input[type="text"] {
+            width: 60px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 5px;
+        }
+        .btn {
+            width: 140px;
+            height: 50px;
+            font-size: 20px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Transpose of Matrix (2x2)</h2>
+
+<form action="" method="post">
+    <input type="text" name="a11"> <input type="text" name="a12"><br>
+    <input type="text" name="a21"> <input type="text" name="a22"><br><br>
+    <input type="submit" value="Transpose" class="btn">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $a11 = $_POST['a11'];
+    $a12 = $_POST['a12'];
+    $a21 = $_POST['a21'];
+    $a22 = $_POST['a22'];
+
+    echo "<h2>Result (Transpose)</h2>";
+    echo "<table border='1' cellspacing='0' cellpadding='10'>";
+    echo "<tr><td>$a11</td><td>$a21</td></tr>";
+    echo "<tr><td>$a12</td><td>$a22</td></tr>";
+    echo "</table>";
+}
+?>
+
+</body>
+</html>
+
+
+Addition of two Matrices:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Addition</title>
+    <style>
+        input[type="text"] {
+            width: 60px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 5px;
+        }
+        .btn {
+            width: 140px;
+            height: 50px;
+            font-size: 20px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Addition of Two Matrices (2x2)</h2>
+
+<form action="" method="post">
+    <h3>Matrix A</h3>
+    <input type="text" name="a11"> <input type="text" name="a12"><br>
+    <input type="text" name="a21"> <input type="text" name="a22"><br>
+
+    <h3>Matrix B</h3>
+    <input type="text" name="b11"> <input type="text" name="b12"><br>
+    <input type="text" name="b21"> <input type="text" name="b22"><br><br>
+
+    <input type="submit" value="Add Matrices" class="btn">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $a11 = $_POST['a11'];
+    $a12 = $_POST['a12'];
+    $a21 = $_POST['a21'];
+    $a22 = $_POST['a22'];
+
+    $b11 = $_POST['b11'];
+    $b12 = $_POST['b12'];
+    $b21 = $_POST['b21'];
+    $b22 = $_POST['b22'];
+
+    echo "<h2>Result (Addition)</h2>";
+    echo "<table border='1' cellspacing='0' cellpadding='10'>";
+    echo "<tr><td>".($a11+$b11)."</td><td>".($a12+$b12)."</td></tr>";
+    echo "<tr><td>".($a21+$b21)."</td><td>".($a22+$b22)."</td></tr>";
+    echo "</table>";
+}
+?>
+
+</body>
+</html>
+
+
+Multiplication of two Matrices:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matrix Multiplication</title>
+    <style>
+        input[type="text"] {
+            width: 60px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 5px;
+        }
+        .btn {
+            width: 170px;
+            height: 50px;
+            font-size: 20px;
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Multiplication of Two Matrices (2x2)</h2>
+
+<form action="" method="post">
+    <h3>Matrix A</h3>
+    <input type="text" name="a11"> <input type="text" name="a12"><br>
+    <input type="text" name="a21"> <input type="text" name="a22"><br>
+
+    <h3>Matrix B</h3>
+    <input type="text" name="b11"> <input type="text" name="b12"><br>
+    <input type="text" name="b21"> <input type="text" name="b22"><br><br>
+
+    <input type="submit" value="Multiply Matrices" class="btn">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $a11 = $_POST['a11'];
+    $a12 = $_POST['a12'];
+    $a21 = $_POST['a21'];
+    $a22 = $_POST['a22'];
+
+    $b11 = $_POST['b11'];
+    $b12 = $_POST['b12'];
+    $b21 = $_POST['b21'];
+    $b22 = $_POST['b22'];
+
+    // Matrix multiplication logic
+    $c11 = $a11*$b11 + $a12*$b21;
+    $c12 = $a11*$b12 + $a12*$b22;
+    $c21 = $a21*$b11 + $a22*$b21;
+    $c22 = $a21*$b12 + $a22*$b22;
+
+    echo "<h2>Result (Multiplication)</h2>";
+    echo "<table border='1' cellspacing='0' cellpadding='10'>";
+    echo "<tr><td>$c11</td><td>$c12</td></tr>";
+    echo "<tr><td>$c21</td><td>$c22</td></tr>";
+    echo "</table>";
+}
+?>
+
+</body>
+</html>
+
+-------------------------------------------------------------------------------------------
+
+
+AngularJS TO-DO example:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple AngularJS To-Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        input {
+            width: 200px;
+            height: 30px;
+            font-size: 18px;
+            margin: 5px;
+        }
+        button {
+            height: 35px;
+            font-size: 18px;
+            margin: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body ng-app="">
+
+<h2>📝 Simple To-Do List</h2>
+
+<!-- Input to add new task -->
+<input type="text" ng-model="task" placeholder="Enter a task">
+<button ng-click="addTask()">Add</button>
+
+<!-- Show the list -->
+<ul>
+    <li ng-repeat="x in tasks">
+        {{x}} <button ng-click="removeTask($index)">❌</button>
+    </li>
+</ul>
+
+<script>
+// AngularJS code inside <script> tag
+function addTask() {
+    if (!$scope.tasks) {
+        $scope.tasks = [];
+    }
+    if ($scope.task) {
+        $scope.tasks.push($scope.task);
+        $scope.task = ""; // clear input box
+    }
+}
+
+function removeTask(index) {
+    $scope.tasks.splice(index, 1);
+}
+
+// Bind functions to Angular manually
+var appElement = document.querySelector('[ng-app]');
+var $scope = angular.element(appElement).scope();
+$scope.addTask = addTask;
+$scope.removeTask = removeTask;
+</script>
+
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------
