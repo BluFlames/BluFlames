@@ -1,1 +1,248 @@
+Write a simple ASP.NET program to display the following Web Controls:  
+A button with text “click me”- The button control must be in the center of the 
+form.  A label with a text hello  
+ A checkbox - The form name must be Web controls. 
 
+WebControlsPage.aspx
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="WebControlsPage.aspx.cs" Inherits="WebControlsPage" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Web Control</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .spacer {
+            margin: 12px 0;
+        }
+
+        .asp-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .asp-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="center">
+            <asp:Label ID="Label1" runat="server" Text="Hello" CssClass="spacer" Font-Size="Large" />
+            <asp:CheckBox ID="CheckBox1" runat="server" Text="Check me" CssClass="spacer" Font-Size="Medium" />
+            <asp:Button ID="Button1" runat="server" Text="Click Me" CssClass="spacer asp-button" />
+        </div>
+    </form>
+</body>
+</html>
+
+------------------------
+
+WebControlsPage.aspx.cs
+
+using System;
+
+public partial class WebControlsPage : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // your code here
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------------
+
+Create a static web page of your choice and add different controls populated 
+with data using ASP.NET.
+
+Create Scientific Calculator Using Windows Forms And C#. 
+
+---------------------------------------------------------------------------------------------------------
+
+Create a ASP.NET web form for User Login with fields, User_Name, Password 
+and create appropriate messages for valid and invalid login. Use ASP.NET, 
+C#.NET & ADO.NET with MySQL as DB. 
+
+Default.aspx
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1.Default" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>User Login</title>
+    <style>
+        .form-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>User Login</h2>
+        <form id="loginForm" runat="server">
+            <asp:Label ID="lblMessage" runat="server" CssClass="message" />
+            <asp:TextBox ID="txtUserName" runat="server" placeholder="Username" />
+            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Password" />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
+        </form>
+    </div>
+</body>
+</html>
+
+
+Default.aspx.cs
+
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+
+namespace WebApplication1
+{
+    public partial class Default : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Any logic you want on page load
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            string userName = txtUserName.Text;
+            string password = txtPassword.Text;
+
+            string connectionString = "Server=your_server; Database=UserLoginDB; Uid=your_username; Pwd=your_password;";
+
+            // Query to check if the user exists
+            string query = "SELECT * FROM Users WHERE UserName = @UserName AND Password = @Password";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UserName", userName);
+                cmd.Parameters.AddWithValue("@Password", password);
+
+                try
+                {
+                    conn.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        // If login is successful
+                        lblMessage.Text = "Login successful!";
+                        lblMessage.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        // Invalid login
+                        lblMessage.Text = "Invalid username or password.";
+                        lblMessage.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle database connection errors
+                    lblMessage.Text = "An error occurred: " + ex.Message;
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+    }
+}
+
+
+1. Create the MySQL Database
+First, create a MySQL database and a table to store user credentials. You can use the following SQL code:
+
+sql
+Copy
+Edit
+CREATE DATABASE UserLoginDB;
+
+USE UserLoginDB;
+
+CREATE TABLE Users (
+    UserId INT AUTO_INCREMENT PRIMARY KEY,
+    UserName VARCHAR(100) NOT NULL,
+    Password VARCHAR(100) NOT NULL
+);
+
+-- Insert a test user (Make sure to encrypt passwords in a real app)
+INSERT INTO Users (UserName, Password) VALUES ('testuser', 'password123');
+
+
+
+4. Setup MySQL Connection
+To interact with MySQL, you'll need the MySQL.Data package. Follow these steps:
+
+Install MySQL.Data package via NuGet:
+
+Right-click on your project and select Manage NuGet Packages.
+
+Search for MySQL.Data and install it.
+
+Configure the connection string:
+
+Replace the connectionString variable in Default.aspx.cs with the actual connection details of your MySQL server (e.g., server address, username, password).
+
+Example connection string:
+
+csharp
+Copy
+Edit
+string connectionString = "Server=localhost; Database=UserLoginDB; Uid=root; Pwd=your_password;";
+5. Test the Application
+Start the application (Press F5).
+
+Go to the Login page (the default page).
+
+Enter the username and password (e.g., testuser and password123).
+
+The system should display a message saying Login successful! if the credentials are correct. Otherwise, it will show Invalid username or password.
